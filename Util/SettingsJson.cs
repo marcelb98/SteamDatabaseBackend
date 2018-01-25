@@ -15,6 +15,15 @@ namespace SteamDatabaseBackend
     #pragma warning disable 0649
     sealed class SettingsJson
     {
+        public sealed class PostgreSQLJson
+        {
+            [JsonProperty(Required = Required.Always)]
+            public string host;
+            public string user;
+            public string pass;
+            public string database;
+        }
+        
         public sealed class SteamJson
         {
             [JsonProperty(Required = Required.Always)]
@@ -105,8 +114,11 @@ namespace SteamDatabaseBackend
         [JsonProperty(Required = Required.Default)]
         public string PatchnotesNotifyURL;
 
+        [JsonProperty(Required = Required.Always)]  // Deprecated because MySQL
+        public string ConnectionString;             // Deprecated because MySQL
+
         [JsonProperty(Required = Required.Always)]
-        public string ConnectionString;
+        public PostgreSQLJson PostgreSQL = new PostgreSQLJson();
 
         [JsonProperty(Required = Required.Always)]
         public FullRunState FullRun;
